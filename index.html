@@ -1,29 +1,253 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>我的Solana虚拟币</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokens | AI-Powered Token on Solana</title>
     <style>
-      body { font-family: Arial, sans-serif; padding:2rem; }
-      .card { max-width:500px;margin:auto;border:1px solid #eee;border-radius:10px;box-shadow:0 2px 8px #eee;}
-      img { max-width:100px; margin-bottom:20px;}
-      .contract {word-break: break-all;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a0a2a 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 科技感背景 */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+
+        .bg-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* 头部 */
+        header {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.5); }
+            50% { box-shadow: 0 0 50px rgba(0, 255, 255, 0.8); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin-bottom: 2rem;
+        }
+
+        /* 合约卡片 */
+        .contract-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .contract {
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: #00ffff;
+            word-break: break-all;
+            background: rgba(0, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        /* 信息卡片 */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .info-card h3 {
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .info-card p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* 社交链接 */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .social-btn.twitter { border-color: #1DA1F2; color: #1DA1F2; }
+        .social-btn.telegram { border-color: #26A5E4; color: #26A5E4; }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .info-grid { grid-template-columns: 1fr; }
+            .social-links { flex-direction: column; align-items: center; }
+        }
     </style>
 </head>
 <body>
-  <div class="card">
-    <h2>币名：SolX</h2>
-    <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Logo">
-    <ul>
-      <li>合约地址：<span class="contract">7xPZrrDkrcEQJWr9HkW7i4xKD6iQ4b3gBtRKeFviNJG7</span></li>
-      <li>发行时间：2026-06-02</li>
-      <li>符号（Symbol）：SOLX</li>
-    </ul>
-    <h3>简介</h3>
-    <p>
-      SolX 是基于Solana链的全新虚拟币，用于社区激励和生态建设。
-    </p>
-  </div>
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">T</div>
+            <h1>Tokens</h1>
+            <p class="tagline">The Future of AI-Powered Token Trading on Solana</p>
+        </header>
+
+        <div class="contract-card">
+            <h2>Contract Address (CA)</h2>
+            <div class="contract">7xPZrrDkrcEQJWr9HkW7i4xKD6iQ4b3gBtRKeFviNJG7</div>
+            <p>Symbol: TOKENS | Chain: Solana (SPL)</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>About Tokens</h3>
+                <p>
+                    Tokens is a revolutionary token built on the Solana blockchain, designed specifically to power the next generation of AI-driven token trading ecosystems. As artificial intelligence reshapes the crypto landscape, Tokens serves as the native utility token that enables seamless, fast, and secure transactions within AI-powered trading platforms.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h3>Our Mission</h3>
+                <p>
+                    We aim to bridge the gap between advanced AI algorithms and decentralized finance. Tokens provides the liquidity, governance, and incentive structure needed to support AI traders, automated market makers, and DeFi protocols that leverage machine learning for optimal trading strategies.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h3>Key Features</h3>
+                <p>
+                    • Built on Solana for ultra-fast transactions<br>
+                    • Low fees ideal for high-frequency AI trading<br>
+                    • Community-driven governance<br>
+                    • Designed for scalability with growing AI adoption
+                </p>
+            </div>
+        </div>
+
+        <div class="social-links">
+            <a href="https://twitter.com/123456789" class="social-btn twitter">
+                <span>𝕏</span> Twitter: @123456789
+            </a>
+            <a href="https://t.me/123456789" class="social-btn telegram">
+                <span>✈</span> Telegram: @123456789
+            </a>
+        </div>
+
+        <footer>
+            <p>© 2026 Tokens. All rights reserved. Built on Solana.</p>
+        </footer>
+    </div>
 </body>
 </html>
