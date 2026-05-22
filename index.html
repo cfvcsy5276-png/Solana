@@ -3,456 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tokens | AI Powered Solana Token Official Website</title>
+    <title>PizzaCoin | 10000 BTC Pizza History</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#00f0ff',
-                        secondary: '#007bff',
-                        darkMain: '#050719',
-                        darkCard: 'rgba(255,255,255,0.04)',
-                        borderGlass: 'rgba(0,240,255,0.15)'
-                    },
-                    fontFamily: {
-                        inter: ['Inter', 'sans-serif']
-                    }
-                }
-            }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
         }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .bg-tech-grid {
-                background-image: linear-gradient(rgba(0,240,255,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,240,255,0.04) 1px, transparent 1px);
-                background-size: 60px 60px;
-            }
-            .bg-radial-glow {
-                background: radial-gradient(circle at center, rgba(0,240,255,0.12), transparent 70%);
-            }
-            .text-gradient-blue {
-                background: linear-gradient(90deg, #00f0ff, #007bff);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
-            }
-            .glass {
-                background: rgba(255,255,255,0.04);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(0,240,255,0.15);
-                border-radius: 18px;
-            }
-            .glass:hover {
-                border-color: rgba(0,240,255,0.3);
-                box-shadow: 0 8px 32px rgba(0,240,255,0.08);
-            }
-            .nav-link {
-                position: relative;
-            }
-            .nav-link::after {
-                content: '';
-                position: absolute;
-                width: 0;
-                height: 2px;
-                left: 0;
-                bottom: -4px;
-                background: #00f0ff;
-                transition: 0.3s;
-            }
-            .nav-link:hover::after {
-                width: 100%;
-            }
-            .side-menu {
-                transform: translateX(100%);
-                transition: transform 0.3s ease;
-            }
-            .side-menu.active {
-                transform: translateX(0);
-            }
-            /* 通用段落：解决手机端单词间距错乱 */
-            .text-indent-para {
-                text-indent: 2em;
-                text-align: justify;
-                word-spacing: normal;
-                letter-spacing: normal;
-                /* 手机端禁止文字拉伸 */
-                text-justify: inter-word;
-                hyphens: auto;
-            }
-            /* 手机端专属优化 */
-            @media (max-width: 768px) {
-                .text-indent-para {
-                    text-align: left;
-                    text-justify: none;
-                    word-spacing: 0px !important;
-                    letter-spacing: 0.2px !important;
-                    line-height: 1.7;
-                }
-            }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: #fff;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #ff9900, #ff4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-bg {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        .text-indent {
+            text-indent: 2rem;
+        }
+        .nav-link {
+            white-space: nowrap;
+        }
+        .btn-responsive {
+            flex-shrink: 0;
+        }
+        html::-webkit-scrollbar {
+            width: 6px;
+        }
+        html::-webkit-scrollbar-thumb {
+            background: #ff9900;
+            border-radius: 10px;
+        }
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 20px;
+        }
+        .icon-btn {
+            transition: all 0.3s ease;
+        }
+        .icon-btn:hover {
+            transform: translateY(-3px);
         }
     </style>
 </head>
-<body class="bg-darkMain text-gray-200 font-inter overflow-x-hidden">
-    <div class="fixed inset-0 bg-tech-grid z-[-3]"></div>
-    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-radial-glow z-[-2]"></div>
+<body>
 
-    <nav class="fixed w-full top-0 z-50 bg-darkMain/80 backdrop-blur-md border-b border-borderGlass">
-        <div class="container mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
-            <a href="#home" class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-xl font-bold text-darkMain">T</div>
-                <span class="text-xl font-bold text-gradient-blue">Tokens <span class="text-sm text-gray-400 font-normal">(CA)</span></span>
-            </a>
-            <div class="hidden lg:flex items-center gap-8">
-                <a href="#home" class="nav-link text-gray-300 hover:text-primary transition">Home</a>
-                <a href="#about" class="nav-link text-gray-300 hover:text-primary transition">About</a>
-                <a href="#tokenomics" class="nav-link text-gray-300 hover:text-primary transition">Tokenomics</a>
-                <a href="#data" class="nav-link text-gray-300 hover:text-primary transition">Data & Charts</a>
-                <a href="#roadmap" class="nav-link text-gray-300 hover:text-primary transition">Roadmap</a>
-                <a href="#future" class="text-gray-300 hover:text-primary transition">Future Outlook</a>
-                <a href="#community" class="text-gray-300 hover:text-primary transition">Community</a>
-            </div>
-            <div class="hidden lg:block relative">
-                <input id="searchBox" type="text" placeholder="Search website content..." class="w-56 py-2 px-4 pl-10 rounded-full bg-darkCard border border-borderGlass text-sm focus:outline-none focus:border-primary transition">
-                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-            </div>
-            <button id="menuBtn" class="lg:hidden text-gray-300 text-2xl">
-                <i class="fas fa-bars"></i>
+<!-- Navigation Bar (Mobile + Desktop Adaptive) -->
+<nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md py-3 px-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <img src="IMAGE_LINK_HERE" alt="PizzaCoin Logo" class="h-12 w-12 rounded-full object-cover">
+            <span class="text-xl font-bold gradient-text">PizzaCoin</span>
+        </div>
+        <div class="hidden md:flex gap-6 lg:gap-8 items-center">
+            <a href="#home" class="nav-link hover:text-orange-400 transition-colors">Home</a>
+            <a href="#about" class="nav-link hover:text-orange-400 transition-colors">About</a>
+            <a href="#tokenomics" class="nav-link hover:text-orange-400 transition-colors">Tokenomics</a>
+            <a href="#outlook" class="nav-link hover:text-orange-400 transition-colors">Future Outlook</a>
+            <a href="#ecosystem" class="nav-link hover:text-orange-400 transition-colors">Ecosystem</a>
+            <a href="#community" class="nav-link hover:text-orange-400 transition-colors">Community</a>
+        </div>
+        <button class="bg-orange-500 hover:bg-orange-600 px-5 py-2 rounded-full font-semibold transition-colors btn-responsive text-sm md:text-base">
+            Buy $PIZZA
+        </button>
+    </div>
+</nav>
+
+<!-- Home Page -->
+<section id="home" class="section pt-40">
+    <div class="max-w-7xl mx-auto text-center px-4">
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            Commemorate The Legendary<br>
+            <span class="gradient-text">10,000 BTC Pizza Transaction</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto mb-10 leading-relaxed text-indent">
+            On May 22, 2010, Laszlo Hanyecz purchased two pizzas with 10,000 BTC, creating the most iconic moment in cryptocurrency history. Today, PizzaCoin is built on Solana to inherit this spirit, with a complete ecosystem, safe liquidity, and long-term value system.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <button class="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-full font-semibold transition-colors text-lg btn-responsive">
+                Launch App
+            </button>
+            <button class="border border-orange-500 text-orange-400 hover:bg-orange-500/10 px-6 py-3 rounded-full font-semibold transition-colors text-lg btn-responsive">
+                Whitepaper
             </button>
         </div>
-    </nav>
-
-    <div id="mobileMenu" class="side-menu fixed top-0 right-0 w-[200px] h-full bg-[#080b22]/95 backdrop-blur-lg z-[60] flex flex-col items-center justify-center gap-6 text-xl border-l border-borderGlass">
-        <button id="closeMenu" class="absolute top-6 right-5 text-2xl text-gray-300">
-            <i class="fas fa-times"></i>
-        </button>
-        <a href="#home" class="text-gray-200 hover:text-primary transition">Home</a>
-        <a href="#about" class="text-gray-200 hover:text-primary transition">About</a>
-        <a href="#tokenomics" class="text-gray-200 hover:text-primary transition">Tokenomics</a>
-        <a href="#data" class="text-gray-200 hover:text-primary transition">Data & Charts</a>
-        <a href="#roadmap" class="text-gray-200 hover:text-primary transition">Roadmap</a>
-        <a href="#future" class="text-gray-200 hover:text-primary transition">Future Outlook</a>
-        <a href="#community" class="text-gray-200 hover:text-primary transition">Community</a>
     </div>
-    <div id="menuOverlay" class="fixed inset-0 bg-black/50 z-[55] hidden"></div>
+</section>
 
-    <section id="home" class="pt-20 min-h-screen flex items-center">
-        <div class="container mx-auto px-6 lg:px-10 py-20">
-            <div class="max-w-4xl mx-auto text-center">
-                <h1 class="text-[42px] md:text-[60px] font-bold leading-tight text-gradient-blue">
-                    Tokens
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-400 mt-6 leading-relaxed text-indent-para">
-                    The first ecological token dedicated to AI-driven token trading, built on the Solana blockchain. Committed to building a stable, sustainable and scenario-rich Web3 ecological system.
+<!-- About Page -->
+<section id="about" class="section bg-[#1a1a1a]">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">About PizzaCoin</h2>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div>
+                <p class="text-gray-300 leading-relaxed mb-5 text-indent">
+                    PizzaCoin is a community-driven meme token deployed on the Solana blockchain, established to honor the historic Bitcoin pizza transaction. This transaction represents the earliest practical application of cryptocurrency and has become an irreplaceable cultural symbol.
                 </p>
-                <div class="mt-10 flex flex-wrap gap-4 justify-center">
-                    <a href="#about" class="px-8 py-3 rounded-full bg-primary text-darkMain font-medium hover:bg-secondary transition">Learn More</a>
-                    <a href="#community" class="px-8 py-3 rounded-full border border-primary text-primary hover:bg-primary/10 transition">Join Community</a>
-                </div>
+                <p class="text-gray-300 leading-relaxed mb-5 text-indent">
+                    Unlike traditional meme coins, PizzaCoin focuses on ecological construction and long-term development. Our official website has been fully launched, and a dedicated mobile application is under development to provide users with diversified one-stop services.
+                </p>
+                <p class="text-gray-300 leading-relaxed text-indent">
+                    We adhere to transparency, security, and community orientation, locking most liquidity to ensure asset safety. PizzaCoin aims to become a valuable and influential token in the Solana ecosystem.
+                </p>
+            </div>
+            <div class="rounded-xl overflow-hidden shadow-2xl">
+                <img src="IMAGE_LINK_HERE" alt="Bitcoin Pizza" class="w-full h-auto">
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="about" class="py-20">
-        <div class="container mx-auto px-6 lg:px-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gradient-blue">About Tokens</h2>
-                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Core positioning, design concept and ecological value</p>
+<!-- Tokenomics Page -->
+<section id="tokenomics" class="section">
+    <div class="max-w-6xl mx-auto px-4 w-full">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Tokenomics</h2>
+        <p class="text-gray-400 text-center mb-12">Fair Launch & Strong Tokenomic Model</p>
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="card-bg p-6 rounded-xl">
+                <h3 class="text-xl font-semibold mb-4 text-orange-400">Holder Growth</h3>
+                <canvas id="holderChart"></canvas>
             </div>
-            <div class="grid lg:grid-cols-2 gap-8">
-                <div class="glass p-8">
-                    <h3 class="text-2xl font-semibold text-primary mb-4">Project Introduction</h3>
-                    <p class="text-gray-300 leading-relaxed text-indent-para">
-                        Tokens is a native SPL token issued on the Solana network, focusing on the integration of artificial intelligence and digital currency trading ecology. With the rapid development of AI technology, intelligent quantitative trading, market sentiment analysis, automated strategy execution and AI asset allocation have gradually become important mainstream demands in the crypto industry.
-                        <br><br>
-                        <span class="text-indent-para inline-block w-full">The project is positioned to provide underlying asset support, ecological incentive circulation, community governance rights and scenario application carrier for all AI trading related platforms and communities. We adhere to pragmatic development, refuse empty hype, and focus on long-term ecological construction and real scenario landing.</span>
-                    </p>
-                </div>
-                <div class="glass p-8">
-                    <h3 class="text-2xl font-semibold text-primary mb-4">Core Advantages</h3>
-                    <ul class="space-y-4 text-gray-300">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-primary mt-1"></i>
-                            <span>Based on Solana, ultra-fast transaction speed and extremely low handling fee</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-primary mt-1"></i>
-                            <span>Exclusive track layout focusing on AI token trading ecosystem</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-primary mt-1"></i>
-                            <span>Reasonable token distribution, no excessive concentrated holding risk</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-primary mt-1"></i>
-                            <span>Community-driven operation, transparent progress disclosure</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-primary mt-1"></i>
-                            <span>Stable long-term operation plan, focusing on sustainable value growth</span>
-                        </li>
-                    </ul>
-                </div>
+            <div class="card-bg p-6 rounded-xl">
+                <h3 class="text-xl font-semibold mb-4 text-orange-400">Trading Volume (SOL)</h3>
+                <canvas id="tradeChart"></canvas>
             </div>
         </div>
-    </section>
-
-    <section id="tokenomics" class="py-20 bg-darkCard">
-        <div class="container mx-auto px-6 lg:px-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gradient-blue">Tokenomics</h2>
-                <p class="text-gray-400 mt-4">Basic parameters and contract information</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="card-bg p-6 rounded-xl text-center">
+                <p class="text-gray-400">Total Supply</p>
+                <p class="text-2xl font-bold text-orange-400">10,000,000,000</p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass p-6 text-center">
-                    <div class="text-3xl font-bold text-primary">1,000,000,000</div>
-                    <p class="text-gray-400 mt-2">Total Supply</p>
-                </div>
-                <div class="glass p-6 text-center">
-                    <div class="text-3xl font-bold text-primary">400,000,000</div>
-                    <p class="text-gray-400 mt-2">Circulating Supply</p>
-                </div>
-                <div class="glass p-6 text-center">
-                    <div class="text-3xl font-bold text-primary">TOKENS</div>
-                    <p class="text-gray-400 mt-2">Token Symbol</p>
-                </div>
-                <div class="glass p-6 text-center">
-                    <div class="text-3xl font-bold text-primary">Solana</div>
-                    <p class="text-gray-400 mt-2">Blockchain Network</p>
-                </div>
+            <div class="card-bg p-6 rounded-xl text-center">
+                <p class="text-gray-400">Liquidity Locked</p>
+                <p class="text-2xl font-bold text-orange-400">98.5%</p>
+            </div>
+            <div class="card-bg p-6 rounded-xl text-center">
+                <p class="text-gray-400">Holders</p>
+                <p class="text-2xl font-bold text-orange-400">3,200+</p>
+            </div>
+            <div class="card-bg p-6 rounded-xl text-center">
+                <p class="text-gray-400">Tax Fee</p>
+                <p class="text-2xl font-bold text-orange-400">0%</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="data" class="py-20">
-        <div class="container mx-auto px-6 lg:px-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gradient-blue">Data & Charts</h2>
-                <p class="text-gray-400 mt-4">Token distribution · Holder structure · User growth trend</p>
+<!-- Future Outlook Page -->
+<section id="outlook" class="section bg-[#1a1a1a]">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Future Outlook</h2>
+        <div class="space-y-8">
+            <div class="card-bg p-6 rounded-xl">
+                <h3 class="text-xl font-semibold text-orange-400 mb-2">Short-Term Goal (0–6 Months)</h3>
+                <p class="text-gray-300 leading-relaxed text-indent">
+                    In the next six months, PizzaCoin will complete the official launch of the mobile application, expand community scale to 10,000+ global members, and reach cooperation with multiple Solana ecological projects to enhance market exposure.
+                </p>
             </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="glass p-6">
-                    <h4 class="text-center mb-5 text-gray-300">Token Allocation Ratio</h4>
-                    <canvas id="chart1"></canvas>
-                </div>
-                <div class="glass p-6">
-                    <h4 class="text-center mb-5 text-gray-300">Holder Distribution</h4>
-                    <canvas id="chart2"></canvas>
-                </div>
-                <div class="glass p-6">
-                    <h4 class="text-center mb-5 text-gray-300">Community User Growth</h4>
-                    <canvas id="chart3"></canvas>
-                </div>
+            <div class="card-bg p-6 rounded-xl">
+                <h3 class="text-xl font-semibold text-orange-400 mb-2">Medium-Term Goal (6–18 Months)</h3>
+                <p class="text-gray-300 leading-relaxed text-indent">
+                    We will launch decentralized service functions, promote PizzaCoin to more trading platforms, and build a complete closed-loop ecosystem including payment, staking, and community governance to achieve stable value growth.
+                </p>
             </div>
-            <div class="glass p-8 mt-10">
-                <h3 class="text-2xl font-semibold text-primary mb-6">Real-Time Usage Data</h3>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div>
-                        <p class="text-gray-400">Total On-chain Transactions</p>
-                        <p class="text-2xl font-bold text-primary mt-2">1,250,000+</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-400">Independent Holders</p>
-                        <p class="text-2xl font-bold text-primary mt-2">5,000+</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-400">Active Community Users</p>
-                        <p class="text-2xl font-bold text-primary mt-2">25,000+</p>
-                    </div>
-                </div>
-                <p class="text-gray-300 mt-8 leading-relaxed text-indent-para">
-                    With the gradual expansion of community scale and the continuous advancement of ecological cooperation, the on-chain transaction volume and independent holding address of Tokens maintain a steady monthly growth. The project adheres to transparent data disclosure, continuously optimizes community activity, and lays a solid foundation for subsequent AI scenario access and ecological cooperation.
+            <div class="card-bg p-6 rounded-xl">
+                <h3 class="text-xl font-semibold text-orange-400 mb-2">Long-Term Vision (18+ Months)</h3>
+                <p class="text-gray-300 leading-relaxed text-indent">
+                    PizzaCoin will become a well-known cultural and financial symbol in the crypto industry, linking traditional catering industry with blockchain technology, creating real application scenarios and promoting the long-term and healthy development of the entire ecosystem.
                 </p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="roadmap" class="py-20 bg-darkCard">
-        <div class="container mx-auto px-6 lg:px-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gradient-blue">Roadmap</h2>
-                <p class="text-gray-400 mt-4">Phased planning and development arrangement</p>
+<!-- Ecosystem Page -->
+<section id="ecosystem" class="section">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Ecosystem</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="card-bg p-6 rounded-xl">
+                <h3 class="text-xl font-semibold mb-4 text-orange-400">Official Website</h3>
+                <p class="text-gray-300 leading-relaxed text-indent">
+                    Information center, real-time data display, project progress update, global user access support.
+                </p>
             </div>
-            <div class="space-y-8">
-                <div class="glass p-8">
-                    <div class="flex flex-col md:flex-row md:items-center gap-6">
-                        <div class="w-16 h-16 rounded-full bg-primary/10 border border-primary flex items-center justify-center text-xl font-bold text-primary">2026</div>
-                        <div>
-                            <h4 class="text-xl font-semibold mb-3">Initial Construction & Community Growth</h4>
-                            <ul class="text-gray-300 space-y-2">
-                                <li>• Official website launch and brand image building</li>
-                                <li>• Initial community accumulation and social media layout</li>
-                                <li>• Complete token liquidity layout and ecological initialization</li>
-                                <li>• Start preliminary cooperation negotiation with AI trading teams</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="glass p-8">
-                    <div class="flex flex-col md:flex-row md:items-center gap-6">
-                        <div class="w-16 h-16 rounded-full bg-secondary/10 border border-secondary flex items-center justify-center text-xl font-bold text-secondary">2026</div>
-                        <div>
-                            <h4 class="text-xl font-semibold mb-3">AI Ecological Cooperation Landing</h4>
-                            <ul class="text-gray-300 space-y-2">
-                                <li>• Access partial AI quantitative trading platform cooperation</li>
-                                <li>• Release ecological incentive rules and community governance mechanism</li>
-                                <li>• Expand multi-platform media exposure and brand influence</li>
-                                <li>• Optimize user experience and iterate official website functions</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="glass p-8">
-                    <div class="flex flex-col md:flex-row md:items-center gap-6">
-                        <div class="w-16 h-16 rounded-full bg-gray-500/10 border border-gray-500 flex items-center justify-center text-xl font-bold text-gray-400">2027</div>
-                        <div>
-                            <h4 class="text-xl font-semibold mb-3">Long-term Ecological Expansion</h4>
-                            <ul class="text-gray-300 space-y-2">
-                                <li>• Deeply layout AI + Web3 track multi-scenario application</li>
-                                <li>• Establish long-term stable ecological cooperation alliance</li>
-                                <li>• Further improve token circulation value and consensus scale</li>
-                                <li>• Explore cross-chain layout and more decentralized application scenarios</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="card-bg p-6 rounded-xl">
+                <h3 class="text-xl font-semibold mb-4 text-orange-400">Mobile App</h3>
+                <p class="text-gray-300 leading-relaxed text-indent">
+                    Asset management, quick trading, community chat, exclusive airdrops, and personalized services.
+                </p>
             </div>
-        </div>
-    </section>
-
-    <section id="future" class="py-20">
-        <div class="container mx-auto px-6 lg:px-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gradient-blue">Future Outlook</h2>
-                <p class="text-gray-400 mt-4">Stable development and rational value expectation</p>
-            </div>
-            <div class="glass p-8">
-                <p class="text-gray-300 leading-relaxed text-lg text-indent-para">
-                    In the next one to three years, the integration trend between artificial intelligence and the crypto industry will continue to deepen. Intelligent trading, AI market analysis, automated strategy tools and machine learning asset allocation will become standard infrastructure in the Web3 industry. As a token specially laid out for this track, Tokens will rely on the Solana high-performance public chain advantage to gradually complete scenario docking, ecological partner expansion and community consensus accumulation.
-                    <br><br>
-                    <span class="text-indent-para inline-block w-full">We do not make exaggerated market value promises and blind high return propaganda. Instead, we focus on down-to-earth ecological construction, continuous optimization of community mechanism, steady expansion of application scenarios, and gradual enhancement of the intrinsic value and circulation demand of the token. With the gradual maturity of the track and the continuous growth of community scale, Tokens will have stable ecological support and reasonable valuation growth space in the long run, bringing reliable long-term holding value and ecological income for participants who recognize the track and stick to long-term layout.</span>
+            <div class="card-bg p-6 rounded-xl">
+                <h3 class="text-xl font-semibold mb-4 text-orange-400">Global Community</h3>
+                <p class="text-gray-300 leading-relaxed text-indent">
+                    Multi-language support, global users, regular events, ecological co-construction, and benefit sharing.
                 </p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="community" class="py-20 bg-darkCard">
-        <div class="container mx-auto px-6 lg:px-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gradient-blue">Community</h2>
-                <p class="text-gray-400 mt-4">Official social contact channel</p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <a href="https://twitter.com/123456789" target="_blank" class="glass p-10 text-center hover:border-primary/40 transition">
-                    <i class="fab fa-x-twitter text-4xl text-primary mb-4"></i>
-                    <h4 class="text-xl font-medium">Official Twitter</h4>
-                    <p class="text-gray-400 mt-2">@123456789</p>
-                </a>
-                <a href="https://t.me/123456789" target="_blank" class="glass p-10 text-center hover:border-primary/40 transition">
-                    <i class="fab fa-telegram text-4xl text-primary mb-4"></i>
-                    <h4 class="text-xl font-medium">Official Telegram</h4>
-                    <p class="text-gray-400 mt-2">@123456789</p>
-                </a>
-            </div>
+<!-- Community Page -->
+<section id="community" class="section bg-[#1a1a1a]">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-8">Join Our Community</h2>
+        <p class="text-gray-300 max-w-2xl mx-auto mb-10 text-indent">
+            Become a member of PizzaCoin, grasp the latest project dynamics, participate in community governance, and grow together with global partners.
+        </p>
+        <div class="flex flex-wrap justify-center gap-6">
+            <!-- X (Twitter) Button -->
+            <a href="https://x.com/PumipatSat63221" target="_blank" class="icon-btn bg-gray-800 hover:bg-gray-700 w-14 h-14 flex items-center justify-center rounded-full transition-all">
+                <i class="fa-brands fa-x-twitter text-2xl text-white"></i>
+            </a>
+            <!-- Telegram Button -->
+            <a href="https://t.me/PizzaCoinGreat" target="_blank" class="icon-btn bg-gray-800 hover:bg-gray-700 w-14 h-14 flex items-center justify-center rounded-full transition-all">
+                <i class="fa-brands fa-telegram text-2xl text-[#26A5E4]"></i>
+            </a>
         </div>
-    </section>
+    </div>
+</section>
 
-    <footer class="py-10 border-t border-borderGlass">
-        <div class="container mx-auto px-6 text-center text-gray-500">
-            <p>© 2026 Tokens Official Website | Built on Solana Blockchain</p>
-            <p class="mt-2 text-sm">All ecological construction adheres to steady and pragmatic development</p>
-        </div>
-    </footer>
+<!-- Footer -->
+<footer class="py-8 px-4 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto text-center text-gray-500">
+        <p>© 2026 PizzaCoin | All Rights Reserved | Built on Solana</p>
+        <p class="mt-2">Inherit History • Create Future</p>
+    </div>
+</footer>
 
-    <script>
-        const menuBtn = document.getElementById('menuBtn');
-        const closeMenu = document.getElementById('menuOverlay');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const menuOverlay = document.getElementById('menuOverlay');
-        const mobileLinks = mobileMenu.querySelectorAll('a');
+<!-- Chart Script -->
+<script>
+    const holderCtx = document.getElementById('holderChart').getContext('2d');
+    new Chart(holderCtx, {
+        type: 'line',
+        data: {
+            labels: ['Week 1','Week 2','Week 3','Week 4'],
+            datasets: [{
+                label: 'Holders',
+                data: [800,1600,2400,3200],
+                borderColor: '#ff9900',
+                backgroundColor: 'rgba(255,153,0,0.1)',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } }
+    });
 
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-            menuOverlay.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        });
-        function closeSideMenu(){
-            mobileMenu.classList.remove('active');
-            menuOverlay.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-        closeMenu.addEventListener('click', closeSideMenu);
-        menuOverlay.addEventListener('click', closeSideMenu);
-        mobileLinks.forEach(link => link.addEventListener('click', closeSideMenu));
+    const tradeCtx = document.getElementById('tradeChart').getContext('2d');
+    new Chart(tradeCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+            datasets: [{
+                label: 'SOL Volume',
+                data: [120,210,170,290,250,380,320],
+                backgroundColor: '#ff4500',
+                borderRadius: 6
+            }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+</script>
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e){
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'});
-            });
-        });
-
-        new Chart(document.getElementById('chart1'), {
-            type:'doughnut',
-            data:{
-                labels:['Community Reward 40%','Liquidity Pool 25%','Ecosystem Cooperation 20%','Team & Reserve 15%'],
-                datasets:[{
-                    data:[40,25,20,15],
-                    backgroundColor:['#00f0ff','#007bff','#2299dd','#55bbff']
-                }]
-            },
-            options:{
-                plugins:{
-                    legend:{labels:{color:'#ccc'}}
-                }
-            }
-        });
-        new Chart(document.getElementById('chart2'), {
-            type:'pie',
-            data:{
-                labels:['Long-term Holders 45%','Active Traders 30%','Institutional Users 10%','New Community Users 15%'],
-                datasets:[{
-                    data:[45,30,10,15],
-                    backgroundColor:['#00f0ff','#007bff','#2299dd','#55bbff']
-                }]
-            },
-            options:{plugins:{legend:{labels:{color:'#ccc'}}}}
-        });
-        new Chart(document.getElementById('chart3'), {
-            type:'line',
-            data:{
-                labels:['Jan(1200)','Feb(1800)','Mar(2500)','Apr(3200)','May(4100)','Jun(5000)'],
-                datasets:[{
-                    label:'Community User Growth',
-                    data:[1200,1800,2500,3200,4100,5000],
-                    borderColor:'#00f0ff',
-                    tension:0.4,
-                    fill:true,
-                    backgroundColor:'rgba(0,240,255,0.1)'
-                }]
-            },
-            options:{
-                plugins:{legend:{labels:{color:'#ccc'}}},
-                scales:{
-                    x:{ticks:{color:'#888'}},
-                    y:{ticks:{color:'#888'}}
-                }
-            }
-        });
-
-        const searchBox = document.getElementById('searchBox');
-        searchBox.addEventListener('input', function(){
-            let kw = this.value.toLowerCase().trim();
-            if(kw.length < 3) return;
-            document.querySelectorAll('p,li,h3,h4').forEach(el=>{
-                let text = el.textContent.toLowerCase();
-                el.style.background = text.includes(kw) ? 'rgba(0,240,255,0.08)' : 'transparent';
-            });
-        });
-    </script>
 </body>
 </html>
