@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PizzaCoin | 10000 BTC Pizza History</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>PizzaCoin | 10,000 BTC Pizza Legacy</title>
+    <!-- TailwindCSS + Font Awesome 6.7.2 + Chart.js -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
         * {
@@ -28,6 +29,7 @@
         .card-bg {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
         .text-indent {
             text-indent: 2rem;
@@ -56,229 +58,415 @@
         }
         .icon-btn:hover {
             transform: translateY(-3px);
+            filter: brightness(1.05);
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.96);
+            backdrop-filter: blur(12px);
+            z-index: 9999;
+            display: none;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+        .modal-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .close-btn {
+            color: #ff9900;
+            font-size: 18px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            display: inline-block;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .close-btn:hover {
+            color: #ff6a00;
+            transform: translateX(-4px);
+        }
+        .whitepaper-content p {
+            text-indent: 2rem;
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+            color: #e5e5e5;
+        }
+        .stable-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 1rem;
+        }
+        .btn-orange {
+            background: #ff9900;
+            transition: all 0.2s ease;
+        }
+        .btn-orange:hover {
+            background: #e68500;
+            transform: scale(0.98);
         }
     </style>
 </head>
 <body>
 
 <!-- Navigation Bar -->
-<nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md py-3 px-4">
+<nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md py-3 px-4 shadow-lg">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
         <div class="flex items-center gap-3">
-            <!-- 正常显示的头像图片 -->
-            <img src="https://img.freepik.com/free-vector/pizza-slice-cartoon-icon_138676-2362.jpg" alt="PizzaCoin Logo" class="h-12 w-12 rounded-full object-cover">
+            <!-- Stable pizza icon instead of external image -->
+            <div class="h-12 w-12 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-md">
+                <span class="text-2xl drop-shadow-sm">🍕</span>
+            </div>
             <span class="text-xl font-bold gradient-text">PizzaCoin</span>
         </div>
         <div class="hidden md:flex gap-6 lg:gap-8 items-center">
             <a href="#home" class="nav-link hover:text-orange-400 transition-colors">Home</a>
             <a href="#about" class="nav-link hover:text-orange-400 transition-colors">About</a>
             <a href="#tokenomics" class="nav-link hover:text-orange-400 transition-colors">Tokenomics</a>
-            <a href="#outlook" class="nav-link hover:text-orange-400 transition-colors">Future Outlook</a>
+            <a href="#outlook" class="nav-link hover:text-orange-400 transition-colors">Roadmap</a>
             <a href="#ecosystem" class="nav-link hover:text-orange-400 transition-colors">Ecosystem</a>
             <a href="#community" class="nav-link hover:text-orange-400 transition-colors">Community</a>
         </div>
-        <!-- 已移除Buy按钮 -->
         <div></div>
     </div>
 </nav>
 
-<!-- Home Page -->
+<!-- Hero Section -->
 <section id="home" class="section pt-40">
     <div class="max-w-7xl mx-auto text-center px-4">
         <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            Commemorate The Legendary<br>
+            Honoring The Legendary<br>
             <span class="gradient-text">10,000 BTC Pizza Transaction</span>
         </h1>
         <p class="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto mb-10 leading-relaxed text-indent">
-            On May 22, 2010, Laszlo Hanyecz purchased two pizzas with 10,000 BTC, creating the most iconic moment in cryptocurrency history. Today, PizzaCoin is built on Solana to inherit this spirit, with a complete ecosystem, safe liquidity, and long-term value system.
+            On May 22, 2010, Laszlo Hanyecz bought two pizzas with 10,000 BTC, creating the most iconic moment in crypto history. 
+            Today, PizzaCoin is built on Solana to carry this spirit forward — with a complete ecosystem, safe liquidity, and a long-term value system.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
-            <button class="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-full font-semibold transition-colors text-lg btn-responsive">
-                Launch App
+            <button onclick="openAppModal()" class="btn-orange hover:bg-orange-600 px-6 py-3 rounded-full font-semibold transition-all text-lg btn-responsive shadow-lg">
+                📱 Launch App (Soon)
             </button>
-            <button class="border border-orange-500 text-orange-400 hover:bg-orange-500/10 px-6 py-3 rounded-full font-semibold transition-colors text-lg btn-responsive">
-                Whitepaper
+            <button onclick="openPaperModal()" class="border border-orange-500 text-orange-400 hover:bg-orange-500/10 px-6 py-3 rounded-full font-semibold transition-colors text-lg btn-responsive">
+                📄 Whitepaper
             </button>
         </div>
     </div>
 </section>
 
-<!-- About Page -->
+<!-- About Section -->
 <section id="about" class="section bg-[#1a1a1a]">
     <div class="max-w-6xl mx-auto px-4">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">About PizzaCoin</h2>
         <div class="grid md:grid-cols-2 gap-10 items-center">
             <div>
                 <p class="text-gray-300 leading-relaxed mb-5 text-indent">
-                    PizzaCoin is a community-driven meme token deployed on the Solana blockchain, established to honor the historic Bitcoin pizza transaction. This transaction represents the earliest practical application of cryptocurrency and has become an irreplaceable cultural symbol.
+                    PizzaCoin is a community-driven meme token deployed on the Solana blockchain, established to honor the historic Bitcoin pizza transaction. 
+                    That transaction represents the earliest real-world application of cryptocurrency and has become an irreplaceable cultural symbol.
                 </p>
                 <p class="text-gray-300 leading-relaxed mb-5 text-indent">
-                    Unlike traditional meme coins, PizzaCoin focuses on ecological construction and long-term development. Our official website has been fully launched, and a dedicated mobile application is under development to provide users with diversified one-stop services.
+                    Unlike traditional meme coins, PizzaCoin focuses on ecosystem building and long-term development. The official website is fully launched, 
+                    and a dedicated mobile application is in development to provide users with diversified one-stop services.
                 </p>
                 <p class="text-gray-300 leading-relaxed text-indent">
-                    We adhere to transparency, security, and community orientation, locking most liquidity to ensure asset safety. PizzaCoin aims to become a valuable and influential token in the Solana ecosystem.
+                    We adhere to transparency, security, and a community-first approach, locking most of the liquidity to ensure asset safety. 
+                    PizzaCoin aims to become a valuable and influential token within the Solana ecosystem.
                 </p>
             </div>
-            <div class="rounded-xl overflow-hidden shadow-2xl">
-                <!-- 可正常加载的详情配图 -->
-                <img src="https://img.freepik.com/free-photo/delicious-pepperoni-pizza-close-up_23-2149402543.jpg" alt="Bitcoin Pizza" class="w-full h-auto">
+            <div class="rounded-xl overflow-hidden shadow-2xl bg-gray-800/30">
+                <!-- Stable high-quality pizza image (Pixabay CDN) -->
+                <img src="https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_1280.jpg" 
+                     alt="Classic pizza commemorating Bitcoin transaction" 
+                     class="w-full h-auto object-cover transition-transform duration-300 hover:scale-105"
+                     style="max-height: 380px; width:100%; object-fit: cover;">
             </div>
         </div>
     </div>
 </section>
 
-<!-- Tokenomics Page -->
+<!-- Tokenomics Section -->
 <section id="tokenomics" class="section">
     <div class="max-w-6xl mx-auto px-4 w-full">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Tokenomics</h2>
-        <p class="text-gray-400 text-center mb-12">Fair Launch & Strong Tokenomic Model</p>
+        <p class="text-gray-400 text-center mb-12">Fair Launch · Deflationary Mechanics · Sustainable Value</p>
         <div class="grid md:grid-cols-2 gap-8 mb-12">
             <div class="card-bg p-6 rounded-xl">
                 <h3 class="text-xl font-semibold mb-4 text-orange-400">Holder Growth</h3>
                 <canvas id="holderChart"></canvas>
             </div>
             <div class="card-bg p-6 rounded-xl">
-                <h3 class="text-xl font-semibold mb-4 text-orange-400">Trading Volume (SOL)</h3>
+                <h3 class="text-xl font-semibold mb-4 text-orange-400">Weekly Volume (SOL)</h3>
                 <canvas id="tradeChart"></canvas>
             </div>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div class="card-bg p-6 rounded-xl text-center">
                 <p class="text-gray-400">Total Supply</p>
-                <p class="text-2xl font-bold text-orange-400">10,000,000,000</p>
+                <p class="text-2xl font-bold text-orange-400">1,000,000,000</p>
+                <p class="text-xs text-gray-500 mt-1">1 Billion PIZZA</p>
             </div>
             <div class="card-bg p-6 rounded-xl text-center">
                 <p class="text-gray-400">Liquidity Locked</p>
                 <p class="text-2xl font-bold text-orange-400">98.5%</p>
+                <p class="text-xs text-gray-500">5-year lock on Raydium</p>
             </div>
             <div class="card-bg p-6 rounded-xl text-center">
                 <p class="text-gray-400">Holders</p>
                 <p class="text-2xl font-bold text-orange-400">3,200+</p>
+                <p class="text-xs text-gray-500">Rapid growth</p>
             </div>
             <div class="card-bg p-6 rounded-xl text-center">
                 <p class="text-gray-400">Tax Fee</p>
                 <p class="text-2xl font-bold text-orange-400">0%</p>
+                <p class="text-xs text-gray-500">No friction, free to spend</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Future Outlook Page -->
+<!-- Future Outlook / Roadmap Section -->
 <section id="outlook" class="section bg-[#1a1a1a]">
     <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Future Outlook</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Roadmap & Future Outlook</h2>
         <div class="space-y-8">
-            <div class="card-bg p-6 rounded-xl">
-                <h3 class="text-xl font-semibold text-orange-400 mb-2">Short-Term Goal (0–6 Months)</h3>
+            <div class="card-bg p-6 rounded-xl hover:shadow-orange-500/10 transition">
+                <h3 class="text-xl font-semibold text-orange-400 mb-2">📌 Short-Term (0–6 months)</h3>
                 <p class="text-gray-300 leading-relaxed text-indent">
-                    In the next six months, PizzaCoin will complete the official launch of the mobile application, expand community scale to 10,000+ global members, and reach cooperation with multiple Solana ecological projects to enhance market exposure.
+                    In the next six months, PizzaCoin will complete the Beta release of its mobile application, expand the global community to 10,000+ members, 
+                    and establish partnerships with multiple Solana ecosystem projects to increase market visibility.
                 </p>
             </div>
-            <div class="card-bg p-6 rounded-xl">
-                <h3 class="text-xl font-semibold text-orange-400 mb-2">Medium-Term Goal (6–18 Months)</h3>
+            <div class="card-bg p-6 rounded-xl hover:shadow-orange-500/10 transition">
+                <h3 class="text-xl font-semibold text-orange-400 mb-2">🚀 Mid-Term (6–18 months)</h3>
                 <p class="text-gray-300 leading-relaxed text-indent">
-                    We will launch decentralized service functions, promote PizzaCoin to more trading platforms, and build a complete closed-loop ecosystem including payment, staking, and community governance to achieve stable value growth.
+                    We will launch decentralized governance and staking features, push PizzaCoin onto more trading platforms, and build a full closed-loop ecosystem 
+                    including payments, staking, and community governance to achieve stable value growth.
                 </p>
             </div>
-            <div class="card-bg p-6 rounded-xl">
-                <h3 class="text-xl font-semibold text-orange-400 mb-2">Long-Term Vision (18+ Months)</h3>
+            <div class="card-bg p-6 rounded-xl hover:shadow-orange-500/10 transition">
+                <h3 class="text-xl font-semibold text-orange-400 mb-2">🌍 Long-Term Vision (18+ months)</h3>
                 <p class="text-gray-300 leading-relaxed text-indent">
-                    PizzaCoin will become a well-known cultural and financial symbol in the crypto industry, linking traditional catering industry with blockchain technology, creating real application scenarios and promoting the long-term and healthy development of the entire ecosystem.
+                    PizzaCoin will become a well-known cultural and financial symbol in the crypto industry, bridging traditional food & beverage sectors with blockchain technology, 
+                    creating real-world use cases, and promoting long-term healthy development of the entire ecosystem.
                 </p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Ecosystem Page -->
+<!-- Ecosystem Section -->
 <section id="ecosystem" class="section">
     <div class="max-w-6xl mx-auto px-4">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Ecosystem</h2>
         <div class="grid md:grid-cols-3 gap-6">
-            <div class="card-bg p-6 rounded-xl">
+            <div class="card-bg p-6 rounded-xl text-center md:text-left">
+                <div class="text-4xl mb-3">🌐</div>
                 <h3 class="text-xl font-semibold mb-4 text-orange-400">Official Website</h3>
                 <p class="text-gray-300 leading-relaxed text-indent">
-                    Information center, real-time data display, project progress update, global user access support.
+                    Information hub, real-time data dashboards, project progress updates, accessible to users worldwide.
                 </p>
             </div>
-            <div class="card-bg p-6 rounded-xl">
+            <div class="card-bg p-6 rounded-xl text-center md:text-left">
+                <div class="text-4xl mb-3">📱</div>
                 <h3 class="text-xl font-semibold mb-4 text-orange-400">Mobile App</h3>
                 <p class="text-gray-300 leading-relaxed text-indent">
-                    Asset management, quick trading, community chat, exclusive airdrops, and personalized services.
+                    Asset management, fast trading, community chat, exclusive airdrops, and personalized DeFi services.
                 </p>
             </div>
-            <div class="card-bg p-6 rounded-xl">
+            <div class="card-bg p-6 rounded-xl text-center md:text-left">
+                <div class="text-4xl mb-3">👥</div>
                 <h3 class="text-xl font-semibold mb-4 text-orange-400">Global Community</h3>
                 <p class="text-gray-300 leading-relaxed text-indent">
-                    Multi-language support, global users, regular events, ecological co-construction, and benefit sharing.
+                    Multi-language support, global users, regular events, co-building the ecosystem and sharing benefits.
                 </p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Community Page -->
+<!-- Community Section (X & Telegram) -->
 <section id="community" class="section bg-[#1a1a1a]">
     <div class="max-w-6xl mx-auto px-4 text-center">
         <h2 class="text-3xl md:text-4xl font-bold mb-8">Join Our Community</h2>
         <p class="text-gray-300 max-w-2xl mx-auto mb-10 text-indent">
-            Become a member of PizzaCoin, grasp the latest project dynamics, participate in community governance, and grow together with global partners.
+            Become a member of PizzaCoin, stay updated on the latest project developments, participate in governance, 
+            and grow together with partners from around the globe.
         </p>
         <div class="flex flex-wrap justify-center gap-6">
-            <!-- X 图标正常显示，跳转指定账号 -->
-            <a href="https://x.com/PumipatSat63221" target="_blank" class="icon-btn bg-gray-800 hover:bg-gray-700 w-14 h-14 flex items-center justify-center rounded-full transition-all">
+            <!-- X (Twitter) - Fontawesome 6.7.2 fully supports fa-x-twitter -->
+            <a href="https://x.com/PumipatSat63221" target="_blank" rel="noopener noreferrer" class="icon-btn bg-gray-800 hover:bg-gray-700 w-14 h-14 flex items-center justify-center rounded-full transition-all shadow-md">
                 <i class="fa-brands fa-x-twitter text-2xl text-white"></i>
             </a>
-            <!-- Telegram 图标正常显示，跳转指定群组 -->
-            <a href="https://t.me/PizzaCoinGreat" target="_blank" class="icon-btn bg-gray-800 hover:bg-gray-700 w-14 h-14 flex items-center justify-center rounded-full transition-all">
+            <a href="https://t.me/PizzaCoinGreat" target="_blank" rel="noopener noreferrer" class="icon-btn bg-gray-800 hover:bg-gray-700 w-14 h-14 flex items-center justify-center rounded-full transition-all shadow-md">
                 <i class="fa-brands fa-telegram text-2xl text-[#26A5E4]"></i>
             </a>
         </div>
+        <p class="text-gray-400 text-sm mt-8">✨ Official channels | Real-time updates | Airdrops ✨</p>
     </div>
 </section>
 
 <!-- Footer -->
 <footer class="py-8 px-4 border-t border-gray-800">
     <div class="max-w-6xl mx-auto text-center text-gray-500">
-        <p>© 2026 PizzaCoin | All Rights Reserved | Built on Solana</p>
-        <p class="mt-2">Inherit History • Create Future</p>
+        <p>© 2026 PizzaCoin | All Rights Reserved | Powered by Solana</p>
+        <p class="mt-2">🍕 Honor the Past · Build the Future 🍕</p>
     </div>
 </footer>
 
-<!-- Chart Script -->
+<!-- App Modal (Under Development) -->
+<div id="appModal" class="modal-overlay">
+    <div class="modal-content text-center pt-20">
+        <span class="close-btn" onclick="closeModal()">← Back</span>
+        <div class="flex justify-center mb-6 text-7xl">🍕📱</div>
+        <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-6">PizzaCoin App</h2>
+        <p class="text-xl text-gray-300">Under Development — Stay Tuned</p>
+        <div class="mt-8 w-20 h-1 bg-orange-500 mx-auto rounded-full"></div>
+    </div>
+</div>
+
+<!-- Whitepaper Modal (Fully English) -->
+<div id="paperModal" class="modal-overlay">
+    <div class="modal-content whitepaper-content">
+        <span class="close-btn" onclick="closeModal()">← Back</span>
+        <h2 class="text-3xl font-bold gradient-text text-center mb-8">🍕 PizzaCoin Whitepaper v1.0</h2>
+
+        <p>Honoring the pizza that changed everything. On May 22, 2010, Laszlo Hanyecz paid 10,000 Bitcoin for two pizzas. That day marked the first time crypto touched the real world, and it changed everything. PizzaCoin is built to honor that moment — not as a joke, not as a short-term pump, but as a real movement on Solana to bring crypto back to everyday spending.</p>
+
+        <p>PizzaCoin is not a one-person project. It is built by over one hundred communities across crypto, all coming together under one slice. No VCs, no presale, no hidden team allocation. Just people who believe that a meme coin can actually be useful if you give it a real reason to exist. And what better reason than pizza?</p>
+
+        <p><strong>The total supply is exactly 1,000,000,000 tokens — one billion, no more, no less.</strong> The contract is renounced, meaning nobody can mint new tokens or freeze wallets ever again. The liquidity pool on Raydium is locked for five years, and proof will be posted publicly. There is zero tax on transactions because PizzaCoin is meant to be spent, not hoarded.</p>
+
+        <p>70% of the total supply goes straight to the liquidity pool. 15% is reserved for a community airdrop across 100 partner communities, unlocked from day one. Another 10% is set aside for marketing and getting PizzaCoin onto major exchanges, held in a multi-signature wallet controlled by five different community members. The remaining 5% is saved for future events like burns and staking, also behind a multi-sig.</p>
+
+        <p><strong>Deflationary plan</strong> is simple and symbolic: On every May 22nd (Pizza Day), one ten-millionth of the supply will be burned — one for each Bitcoin that bought those two pizzas. Additional burns will occur when the community hits major milestones (e.g., 100,000 holders or a top-tier exchange listing). The community will also vote quarterly on whether to burn leftover marketing funds. The goal is to remove at least 30% of the total supply within three years.</p>
+
+        <p><strong>The roadmap</strong> is built around real events, not empty promises. First comes the fair launch on Raydium with no presale and no early access. Then the airdrop to 100 communities and the opening of all social channels. Within the first six months, the focus is on centralized exchange listings, the first Pizza Day burn, and building partnerships with real-world food vendors through Solana Pay. The long-term vision is simple: a coin you can actually use to buy a slice, whether online or in a shop.</p>
+
+        <p>The team is anonymous but accountable. All important wallets are multi-signature, and no single person has control. The contract address will be posted 30 minutes before launch on Twitter and Telegram, and everything will be verified on RugCheck and Solscan from the very first block.</p>
+
+        <p><strong>Core Token Metrics</strong><br>
+        • Token Symbol: PIZZA<br>
+        • Total Supply: 1,000,000,000 (1 billion)<br>
+        • Transaction Tax: 0%<br>
+        • Liquidity Lock: 5 years (Raydium)<br>
+        • Blockchain: Solana (high speed, low fees)<br>
+        • Governance: Fully community-driven<br>
+        • First Burn Event: May 22, 2026 (recurring every Pizza Day)
+        </p>
+
+        <p>PizzaCoin is not financial advice and does not guarantee any return. It is a community experiment in bringing back the original spirit of crypto, where a coin is worth what people will trade for it — including a hot slice of pizza. Participate only if you understand the risks and believe in the idea.</p>
+        <p class="text-orange-300 text-center mt-6">#InheritTheSlice  #PizzaDayForever</p>
+    </div>
+</div>
+
 <script>
+    // Chart 1: Holder growth
     const holderCtx = document.getElementById('holderChart').getContext('2d');
     new Chart(holderCtx, {
         type: 'line',
         data: {
-            labels: ['Week 1','Week 2','Week 3','Week 4'],
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
             datasets: [{
                 label: 'Holders',
-                data: [800,1600,2400,3200],
+                data: [800, 1600, 2400, 3200],
                 borderColor: '#ff9900',
-                backgroundColor: 'rgba(255,153,0,0.1)',
+                backgroundColor: 'rgba(255,153,0,0.08)',
+                borderWidth: 3,
                 fill: true,
-                tension: 0.4
+                tension: 0.4,
+                pointBackgroundColor: '#ff4500',
+                pointBorderColor: '#fff',
+                pointRadius: 4,
+                pointHoverRadius: 6
             }]
         },
-        options: { responsive: true, plugins: { legend: { display: false } } }
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: true,
+            plugins: { 
+                legend: { labels: { color: '#ccc' } },
+                tooltip: { backgroundColor: '#1f1f1f', titleColor: '#ff9900' }
+            },
+            scales: {
+                y: { grid: { color: '#2c2c2c' }, ticks: { color: '#ccc' } },
+                x: { ticks: { color: '#ccc' } }
+            }
+        }
     });
 
+    // Chart 2: Trading volume (SOL)
     const tradeCtx = document.getElementById('tradeChart').getContext('2d');
     new Chart(tradeCtx, {
         type: 'bar',
         data: {
-            labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
             datasets: [{
                 label: 'SOL Volume',
-                data: [120,210,170,290,250,380,320],
+                data: [125, 218, 172, 298, 254, 389, 326],
                 backgroundColor: '#ff4500',
-                borderRadius: 6
+                borderRadius: 8,
+                barPercentage: 0.65
             }]
         },
-        options: { responsive: true, plugins: { legend: { display: false } } }
+        options: { 
+            responsive: true, 
+            plugins: { 
+                legend: { labels: { color: '#ccc' } },
+                tooltip: { backgroundColor: '#1f1f1f' }
+            },
+            scales: {
+                y: { grid: { color: '#2c2c2c' }, ticks: { color: '#ccc' } },
+                x: { ticks: { color: '#ccc' } }
+            }
+        }
+    });
+
+    // Modal controls
+    function openAppModal(){
+        document.getElementById('appModal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+    function openPaperModal(){
+        document.getElementById('paperModal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+        document.getElementById('appModal').style.display = 'none';
+        document.getElementById('paperModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Close modal when clicking on overlay background
+    window.onclick = function(event) {
+        const appModal = document.getElementById('appModal');
+        const paperModal = document.getElementById('paperModal');
+        if (event.target === appModal) closeModal();
+        if (event.target === paperModal) closeModal();
+    }
+    
+    // Security: add rel attribute to external links
+    document.querySelectorAll('a[target="_blank"]').forEach(link => {
+        link.setAttribute('rel', 'noopener noreferrer');
+    });
+    
+    // Smooth scroll for nav links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if(targetId && targetId.startsWith('#')) {
+                e.preventDefault();
+                const targetElem = document.querySelector(targetId);
+                if(targetElem) {
+                    targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
     });
 </script>
-
 </body>
 </html>
