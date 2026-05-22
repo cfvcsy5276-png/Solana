@@ -61,11 +61,12 @@
 </head>
 <body>
 
-<!-- Navigation Bar (Mobile + Desktop Adaptive) -->
+<!-- Navigation Bar -->
 <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md py-3 px-4">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
         <div class="flex items-center gap-3">
-            <img src="IMAGE_LINK_HERE" alt="PizzaCoin Logo" class="h-12 w-12 rounded-full object-cover">
+            <!-- 正常显示的头像图片 -->
+            <img src="https://img.freepik.com/free-vector/pizza-slice-cartoon-icon_138676-2362.jpg" alt="PizzaCoin Logo" class="h-12 w-12 rounded-full object-cover">
             <span class="text-xl font-bold gradient-text">PizzaCoin</span>
         </div>
         <div class="hidden md:flex gap-6 lg:gap-8 items-center">
@@ -76,9 +77,8 @@
             <a href="#ecosystem" class="nav-link hover:text-orange-400 transition-colors">Ecosystem</a>
             <a href="#community" class="nav-link hover:text-orange-400 transition-colors">Community</a>
         </div>
-        <button class="bg-orange-500 hover:bg-orange-600 px-5 py-2 rounded-full font-semibold transition-colors btn-responsive text-sm md:text-base">
-            Buy $PIZZA
-        </button>
+        <!-- 已移除Buy按钮 -->
+        <div></div>
     </div>
 </nav>
 
@@ -120,7 +120,8 @@
                 </p>
             </div>
             <div class="rounded-xl overflow-hidden shadow-2xl">
-                <img src="IMAGE_LINK_HERE" alt="Bitcoin Pizza" class="w-full h-auto">
+                <!-- 可正常加载的详情配图 -->
+                <img src="https://img.freepik.com/free-photo/delicious-pepperoni-pizza-close-up_23-2149402543.jpg" alt="Bitcoin Pizza" class="w-full h-auto">
             </div>
         </div>
     </div>
@@ -224,11 +225,11 @@
             Become a member of PizzaCoin, grasp the latest project dynamics, participate in community governance, and grow together with global partners.
         </p>
         <div class="flex flex-wrap justify-center gap-6">
-            <!-- X (Twitter) Button -->
+            <!-- X 图标正常显示，跳转指定账号 -->
             <a href="https://x.com/PumipatSat63221" target="_blank" class="icon-btn bg-gray-800 hover:bg-gray-700 w-14 h-14 flex items-center justify-center rounded-full transition-all">
                 <i class="fa-brands fa-x-twitter text-2xl text-white"></i>
             </a>
-            <!-- Telegram Button -->
+            <!-- Telegram 图标正常显示，跳转指定群组 -->
             <a href="https://t.me/PizzaCoinGreat" target="_blank" class="icon-btn bg-gray-800 hover:bg-gray-700 w-14 h-14 flex items-center justify-center rounded-full transition-all">
                 <i class="fa-brands fa-telegram text-2xl text-[#26A5E4]"></i>
             </a>
